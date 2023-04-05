@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -24,6 +26,9 @@ public class Course {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Professor professor;
+
+    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Enrollment> enrollmentList = new ArrayList<>();
 
     public Course(String title, int studentNumber, Professor professor) {
         this.title = title;
