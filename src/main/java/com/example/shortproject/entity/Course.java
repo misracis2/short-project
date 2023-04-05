@@ -1,12 +1,15 @@
 package com.example.shortproject.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 @Entity
 @NoArgsConstructor
+@Getter
 public class Course {
 
     @Id
@@ -15,7 +18,8 @@ public class Course {
 
     private String title;
 
-    @Size(min = 6, max = 15)
+    @Min(6)
+    @Max(15)
     private int studentNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
