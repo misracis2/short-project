@@ -19,6 +19,9 @@ public class SecurityConfig {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/professor/**").permitAll()
+                .antMatchers("/admin/**").permitAll()
+                .antMatchers("/signup?**").permitAll()
 
 
                 .and()
