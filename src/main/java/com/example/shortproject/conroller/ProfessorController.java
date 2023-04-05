@@ -1,6 +1,7 @@
 package com.example.shortproject.conroller;
 
 import com.example.shortproject.dto.CourseDto;
+import com.example.shortproject.dto.ProfessorDto;
 import com.example.shortproject.service.ProfessorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class ProfessorController {
     }
 
     @GetMapping("/course/{courseId}/student")
-    public void getStudent(@PathVariable long courseId){
-
+    public ProfessorDto.CourseAndStudentDto getStudent(@PathVariable long courseId){
+        return professorService.getStudent(courseId);
     }
 }

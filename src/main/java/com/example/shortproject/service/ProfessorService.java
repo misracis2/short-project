@@ -1,9 +1,12 @@
 package com.example.shortproject.service;
 
 import com.example.shortproject.dto.CourseDto;
+import com.example.shortproject.dto.ProfessorDto;
 import com.example.shortproject.entity.Course;
+import com.example.shortproject.entity.Enrollment;
 import com.example.shortproject.entity.Professor;
 import com.example.shortproject.repository.CourseRepository;
+import com.example.shortproject.repository.EnrollmentRepository;
 import com.example.shortproject.repository.ProfessorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,24 @@ public class ProfessorService {
 
     private final CourseRepository courseRepository;
     private final ProfessorRepository professorRepository;
+    private final EnrollmentRepository enrollmentRepository;
+
+    //강의별 수강생 조회
+    public ProfessorDto.CourseAndStudentDto getStudent(long courseId) {
+        //강의 식별자로 학생리스트 확인
+        List<Enrollment> enrollmentList = enrollmentRepository.findByCourse_CourseId(courseId);
+        //강의 객체 생성
+        Course course = enrollmentList.get(0).getCourse();
+        //수강 학생 리스트 생성
+        List<String> studentList = new ArrayList<>();
+        for (Enrollment enrollment : enrollmentList) {
+            studentList.add(enrollment.getStudent().getName());
+        }
+        return new ProfessorDto.CourseAndStudentDto(course.getTitle(),
+                                                    course.getStudentNumber(),
+                                                    course.getProfessor().getName(),
+                                                    studentList);
+    }
 
     //강의 정보 조회
     @Transactional(readOnly = true)
