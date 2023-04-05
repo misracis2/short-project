@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,11 @@ public class ProfessorService {
         Course course = courseRepository.findById(courseId).orElseThrow(
                 ()-> new IllegalArgumentException("존재하지 않는 강의입니다.")
         );
-        return new CourseDto.ResponseDto(course.getCourseId(), course.getTitle(), course.getStudentNumber(), course.getProfessor());
+        if(LocalDate.now().isBefore(course.getCloseDate())){
+            throw new IllegalArgumentException("수강신청 기간 중입니다.");
+        }else {
+            return new CourseDto.ResponseDto(course.getCourseId(), course.getTitle(), course.getStudentNumber(), course.getProfessor());
+        }
     }
 
 
