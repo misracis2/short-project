@@ -12,5 +12,5 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
     //동시 수강신청 처리를 위한 비관적 락 설정
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Override
-    Optional<Course> findById(Long aLong);
+    Optional<Course> findById(Long courseId);
 }

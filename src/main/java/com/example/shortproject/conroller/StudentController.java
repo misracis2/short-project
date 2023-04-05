@@ -20,7 +20,7 @@ public class StudentController {
 
     //수강 철회 기능
     @DeleteMapping("/courses/{courseId}")
-    public void cancelCourse(@PathVariable Long courseId) {
-
+    public void cancelCourse(@PathVariable Long courseId, HttpServletRequest request) {
+        studentService.cancelCourse(courseId, request);
     }
 }
