@@ -3,9 +3,9 @@ package com.example.shortproject;
 import com.example.shortproject.entity.Course;
 import com.example.shortproject.entity.Professor;
 import com.example.shortproject.entity.Student;
-import com.example.shortproject.repository.StudentRepository;
 import com.example.shortproject.repository.CourseRepository;
 import com.example.shortproject.repository.ProfessorRepository;
+import com.example.shortproject.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 public class PostConstruct {
     @Autowired
     private ProfessorRepository professorRepository;
-
     @Autowired
     private CourseRepository courseRepository;
     @Autowired
@@ -21,9 +20,9 @@ public class PostConstruct {
 
     @javax.annotation.PostConstruct
     public void init(){
-        Professor professorKim = new Professor("김교수");
-        Professor professorLee = new Professor("이교수");
-        Professor professorChoi = new Professor("최교수");
+        Professor professorKim = new Professor("professorKim", "1234", "김교수");
+        Professor professorLee = new Professor("professorLee", "1234", "이교수");
+        Professor professorChoi = new Professor("professorChoi", "1234", "최교수");
 
         professorRepository.save(professorKim);
         professorRepository.save(professorLee);
@@ -36,7 +35,7 @@ public class PostConstruct {
         courseRepository.save(new Course("사회복지학 개론", 6, professorChoi));
 
         for(int i = 1 ; i<=30; i++){
-            studentRepository.save(new Student("김학생"+i));
+            studentRepository.save(new Student("김학생"+i,"1234","김학생"+i));
         }
     }
 
