@@ -2,11 +2,8 @@ package com.example.shortproject.conroller;
 
 import com.example.shortproject.service.StudentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,8 +12,15 @@ public class StudentController {
 
     private final StudentService studentService;
 
+    //수강 신청 기능
     @PostMapping("/courses/{courseId}")
-    public void addCourse(@PathVariable Long courseId, UserDetails userDetails) {
-        studentService.addCourse(courseId, userDetails);
+    public void addCourse(@PathVariable Long courseId, HttpServletRequest request) {
+        studentService.addCourse(courseId, request);
+    }
+
+    //수강 철회 기능
+    @DeleteMapping("/courses/{courseId}")
+    public void cancelCourse(@PathVariable Long courseId) {
+
     }
 }
