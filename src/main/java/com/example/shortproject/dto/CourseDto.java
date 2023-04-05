@@ -22,4 +22,13 @@ public class CourseDto {
             this.professor = professor;
         }
     }
+
+    @Getter
+    public static class RegistrationDto{
+        private Long courseId;
+        private String title;
+        private String professorName;
+        private String openDate;
+        private String closeDate;
+    }
 }

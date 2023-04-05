@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 @Service
 @RequiredArgsConstructor
 public class AdminService {
@@ -33,4 +36,25 @@ public class AdminService {
         }
 
     }
+
+    //수강신청 기간 정하기
+    public void changePeriod(Long courseId, String title, String professorName, LocalDate openDate, LocalDate closeDate) {
+        Course course = checkPeriod(courseId, openDate, closeDate);
+        course.changePeriod(openDate, closeDate);
+    }
+
+
+    //수강기간 validity(2주 이상, 4주 이하)
+    public Course checkPeriod(Long courseId, LocalDate openDate, LocalDate closeDate) {
+        if (Period.between(openDate, closeDate).getDays() < 14) {
+            throw new IllegalArgumentException("수강신청 기간은 최소 2주일 이상입니다.");
+        }else if(Period.between(openDate, closeDate).getDays() > 28){
+            throw new IllegalArgumentException("수강신청 기간은 최대 4주 이하입니다.");
+        }else{
+            return courseRepository.findById(courseId).orElseThrow(
+                    () -> new IllegalArgumentException("존재하지 않는 강의입니다.")
+            );
+        }
+    }
 }
+
