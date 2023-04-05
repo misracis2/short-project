@@ -32,4 +32,10 @@ public class Professor {
         this.courseNumber = 0;
         this.memberRole = MemberRole.PROFESSOR;
     }
+    public void increaseCourseNumber(){
+        courseNumber++;
+    }
+    public void decreaseCourseNumber(){
+        courseNumber--;
+    }
 }
