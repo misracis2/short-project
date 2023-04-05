@@ -10,11 +10,15 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Student {
+public class Student extends Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
+
+    private String loginId;
+
+    private String password;
 
     private String name;
 
@@ -27,7 +31,9 @@ public class Student {
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Enrollment> enrollmentList;
 
-    public Student(String name) {
+    public Student(String loginId, String password, String name) {
+        this.loginId = loginId;
+        this.password = password;
         this.name = name;
         this.enrollmentNumber = 0;
         this.memberRole = MemberRole.STUDENT;

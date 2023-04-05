@@ -10,11 +10,15 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Professor {
+public class Professor extends Member{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long professorId;
+
+    private String loginId;
+
+    private String password;
 
     private String name;
 
@@ -27,7 +31,9 @@ public class Professor {
     @OneToMany(mappedBy = "professor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Course> CourseList;
 
-    public Professor(String name) {
+    public Professor(String loginId, String password, String name) {
+        this.loginId = loginId;
+        this.password = password;
         this.name = name;
         this.courseNumber = 0;
         this.memberRole = MemberRole.PROFESSOR;
