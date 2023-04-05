@@ -38,4 +38,12 @@ public class Student extends Member{
         this.enrollmentNumber = 0;
         this.memberRole = MemberRole.STUDENT;
     }
+
+    public void increaseEnrollmentNumber() {
+        this.enrollmentNumber++;
+    }
+
+    public void decreaseEnrollmentNumber() {
+        this.enrollmentNumber--;
+    }
 }

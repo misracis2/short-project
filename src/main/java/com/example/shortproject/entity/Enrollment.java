@@ -20,4 +20,8 @@ public class Enrollment {
     @ManyToOne(fetch = FetchType.EAGER)
     private Course course;
 
+    public Enrollment(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+    }
 }

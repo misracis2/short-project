@@ -45,4 +45,12 @@ public class Course {
         this.openDate = openDate;
         this.closeDate = closeDate;
     }
+
+    public void increaseStudentNumber() {
+        this.studentNumber++;
+    }
+
+    public void decreaseStudentNumber() {
+        this.studentNumber--;
+    }
 }
