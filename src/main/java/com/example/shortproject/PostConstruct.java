@@ -2,6 +2,8 @@ package com.example.shortproject;
 
 import com.example.shortproject.entity.Course;
 import com.example.shortproject.entity.Professor;
+import com.example.shortproject.entity.Student;
+import com.example.shortproject.repository.StudentRepository;
 import com.example.shortproject.repository.CourseRepository;
 import com.example.shortproject.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class PostConstruct {
 
     @Autowired
     private CourseRepository courseRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
     @javax.annotation.PostConstruct
     public void init(){
@@ -31,6 +35,9 @@ public class PostConstruct {
         courseRepository.save(new Course("헌번론", 6, professorLee));
         courseRepository.save(new Course("사회복지학 개론", 6, professorChoi));
 
+        for(int i = 1 ; i<=30; i++){
+            studentRepository.save(new Student("김학생"+i));
+        }
     }
 
 }
